@@ -4,11 +4,21 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/widgets/app_buttons.dart';
 import '../../../core/widgets/app_text_field.dart';
 import '../../../core/widgets/auth_layout.dart';
+import '../../home/screens/home_screen.dart';
 import 'forget_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final String role;
   const LoginScreen({super.key, this.role = ''});
+
+  // Demo login: no validation, goes straight to Home.
+  void _login(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => HomeScreen(role: role)),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +52,7 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        PrimaryButton(text: 'Log In', onPressed: () {}),
+        PrimaryButton(text: 'Log In', onPressed: () => _login(context)),
         const SizedBox(height: 16),
         OutlineButtonX(text: 'Sign Up', onPressed: () {}),
       ],
